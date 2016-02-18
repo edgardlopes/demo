@@ -25,12 +25,18 @@
         <tr>
             <th th:text="#{col.id}">ID</th>
             <th th:text="#{col.name}">Name</th>
+            <th th:text="#{col.address}">Address</th>
+            <th th:text="#{col.email}">Email</th>
+            <th th:text="#{col.phone}">Phone</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="r : ${rows}">
             <td th:text="${r.id}">Row 1 Data 1</td>
             <td th:text="${r.name}">Row 1 Data 2</td>
+            <td th:text="${r.address}">Row 1 Data 3</td>
+            <td th:text="${r.email}">Row 1 Data 4</td>
+            <td th:text="${r.phone}">Row 1 Data 5</td>
         </tr>
         </tbody>
     </table>

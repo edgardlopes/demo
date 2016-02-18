@@ -67,21 +67,30 @@ class HelloController @Autowired constructor(val service: RowService) {
 
     @RequestMapping("/{user}/rows", method = arrayOf(RequestMethod.GET))
     fun hello(@PathVariable user: String, model: Model): String {
-        model.addAttribute("rows", service!!.getRows())
+        model.addAttribute("rows", service.getRows(user))
         return "${user}/hello"
     }
 }
 
-data class Row(val id: java.lang.Long, val name: java.lang.String)
+data class Row(
+    val id: java.lang.Long,
+    val name: java.lang.String,
+    val address: java.lang.String,
+    val email: java.lang.String,
+    val phone: java.lang.String)
 
 @Service
-class RowService @Autowired constructor(val mapper: RowMapper){
-    fun getRows() : List<Row> {
-        return mapper.findAll();
+class RowService @Autowired constructor(val mapper: RowMapper, val mapperXml: RowMapperXml){
+    fun getRows(user: String) : List<Row> {
+        return if ("user1" == user) mapper.findAll() else  mapperXml.findAll();
     }
 }
 
 interface RowMapper {
     @Select("SELECT * FROM ROW")
+    fun findAll(): List<Row>
+}
+
+interface RowMapperXml {
     fun findAll(): List<Row>
 }
