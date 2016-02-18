@@ -27,9 +27,10 @@ repositories {
 }
 
 dependencies {
-    compile "org.springframework.boot:spring-boot-devtools"
-    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
     compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    compile "org.springframework.boot:spring-boot-devtools"
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 
     runtime "com.h2database:h2"
 
