@@ -33,7 +33,9 @@ data class Row(val id: Long, val name: String)
 @Service
 class RowService {
     fun getRows() : List<Row>? {
-        return listOf(Row(1L, "Foo"));
+        val rows: MutableList<Row> = mutableListOf()
+        (1L..100L).forEach { rows.add(Row(it, "name${it}"))  }
+        return rows;
     }
 }
 
