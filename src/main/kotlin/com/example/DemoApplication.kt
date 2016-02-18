@@ -1,5 +1,6 @@
 package com.example
 
+import org.apache.ibatis.annotations.Select
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -62,9 +63,7 @@ open class DemoSecurityConfig : WebSecurityConfigurerAdapter() {
 }
 
 @Controller
-class HelloController {
-    @Autowired
-    private val service: RowService? = null
+class HelloController @Autowired constructor(val service: RowService) {
 
     @RequestMapping("/{user}/rows", method = arrayOf(RequestMethod.GET))
     fun hello(@PathVariable user: String, model: Model): String {
@@ -73,14 +72,16 @@ class HelloController {
     }
 }
 
-data class Row(val id: Long, val name: String)
+data class Row(val id: java.lang.Long, val name: java.lang.String)
 
 @Service
-class RowService {
+class RowService @Autowired constructor(val mapper: RowMapper){
     fun getRows() : List<Row> {
-        val rows: MutableList<Row> = mutableListOf()
-        (1L..100L).forEach { rows.add(Row(it, "name${it}"))  }
-        return rows;
+        return mapper.findAll();
     }
 }
 
+interface RowMapper {
+    @Select("SELECT * FROM ROW")
+    fun findAll(): List<Row>
+}
