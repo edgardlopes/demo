@@ -73,6 +73,7 @@ class HelloController @Autowired constructor(val service: RowService) {
 
     @RequestMapping("/{user}/rows", method = arrayOf(RequestMethod.GET))
     fun hello(@PathVariable user: String, model: Model): String {
+        model.addAttribute("user", user)
         model.addAttribute("rows", service.getRows(user))
         return "${user}/hello"
     }
