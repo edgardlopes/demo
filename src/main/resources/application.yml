@@ -8,5 +8,7 @@ app:
       user1: { name: user1, password: user1, role: USER_1 }
       user2: { name: user2, password: user2, role: USER_2 }
       admin: { name: admin, password: admin, role: ADMIN }
+server.port: 8180
 security.basic.enabled: false
 spring.mvc.locale: fi_FI
+
