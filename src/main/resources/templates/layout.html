@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:fragment="page">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/demo.css}"/>
+    <title th:text="#{__${siteId}__.title}">Hello Kotlin!</title>
+
+    <th:block layout:include="::head-custom" />
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Demo</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/__${user}__/rows}">Home</a></li>
+            </ul>
+            <form th:action="@{/logout}" method="post" class="navbar-form navbar-right">
+                <input type="submit" value="Log Out" class="btn"/>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container" layout:include="::content">Here goes content</div>
+</body>
+</html>
