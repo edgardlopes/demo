@@ -51,7 +51,13 @@ open class DemoSecurityConfig : WebSecurityConfigurerAdapter() {
         demoSecurityProperties().authorize.entries.forEach {
             http.authorizeRequests().antMatchers(it.key).hasAnyRole(*it.value)
         }
-        http.authorizeRequests().and().httpBasic()
+        http.authorizeRequests().and()
+                .formLogin()
+                .permitAll()
+
+                .and()
+
+                .logout()
     }
 
     @Throws(Exception::class)
